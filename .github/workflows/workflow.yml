@@ -26,3 +26,7 @@ jobs:
           branch: gh-pages 
           folder: build
           token: ${{ secrets.EMPAPP}}
+
+
+      - name: Set output
+        run: echo "deployment-status=success" >> $GITHUB_ENV
