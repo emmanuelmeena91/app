@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      
       - name: Install dependencies
         run: npm install
 
@@ -26,9 +31,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.2.0
         with:
           branch: gh-pages
-          folder: site 
-          token: ${{ secrets.DEPLOY_KEY }}
+          folder: build
+          token: ${{ secrets.EMPAPP }}
+                
+      - name: Update environment files
+        run: |
+          echo "SITE_DIRECTORY=/home/runner/work/app/app/site" >> $GITHUB_ENV
+          echo "DIRECTORY_DOES_NOT_EXIST=true" >> $GITHUB_ENV
